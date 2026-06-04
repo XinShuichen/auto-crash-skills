@@ -21,9 +21,9 @@ The bundled license is preserved at
 
 ## codex-transcript-viewer
 
-`examples/hugetlb-pmd-share/session-019e8e85-transcript.html` embeds HTML
-viewer assets from `https://github.com/masonc15/codex-transcript-viewer` at commit
-`2d0df3f1ce8b41c085c181c8df7aebcfb6ef9b0d`.
+The transcript viewers under `examples/*/session-*-transcript.html` embed HTML
+viewer assets from `https://github.com/masonc15/codex-transcript-viewer` at
+commit `2d0df3f1ce8b41c085c181c8df7aebcfb6ef9b0d`.
 
 License: MIT License.
 

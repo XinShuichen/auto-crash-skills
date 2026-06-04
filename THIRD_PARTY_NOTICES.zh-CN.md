@@ -20,10 +20,9 @@ Copyright: Copyright (c) 2025 Chris Mason.
 
 ## codex-transcript-viewer
 
-`examples/hugetlb-pmd-share/session-019e8e85-transcript.html` 内嵌的 HTML
-viewer assets 来自 `https://github.com/masonc15/codex-transcript-viewer`，
-对应 commit 为
-`2d0df3f1ce8b41c085c181c8df7aebcfb6ef9b0d`。
+`examples/*/session-*-transcript.html` 下的 transcript viewer 内嵌 HTML
+assets 来自 `https://github.com/masonc15/codex-transcript-viewer`，对应
+commit 为 `2d0df3f1ce8b41c085c181c8df7aebcfb6ef9b0d`。
 
 License: MIT License.
 

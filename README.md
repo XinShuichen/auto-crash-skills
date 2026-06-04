@@ -85,14 +85,18 @@ python3 skills/kernel-crash-debugger/scripts/crash_session.py collect \
 The script writes local files only. It does not publish reports or upload
 artifacts.
 
-## Validation Example
+## Validation Examples
 
 The public repository does not ship crash dumps, `vmlinux`, or private kernel
-source. The tracked example under
-[examples/hugetlb-pmd-share](examples/hugetlb-pmd-share/README.md) documents the
-expected validation shape for a local hugetlbfs crash case and includes a
-[Codex session transcript](examples/hugetlb-pmd-share/session-019e8e85-transcript.html)
-from the blind validation run.
+source. The tracked examples document the expected validation shape for local
+cases:
+
+- [examples/hugetlb-pmd-share](examples/hugetlb-pmd-share/README.md):
+  hugetlbfs PMD sharing panic, with a local reproducer and a blind-validation
+  transcript.
+- [examples/mempolicy-offset-il-node-race](examples/mempolicy-offset-il-node-race/README.md):
+  `MPOL_INTERLEAVE` / cpuset rebinding panic at `__next_zones_zonelist`, with a
+  blind-validation transcript and expected root-cause chain.
 
 ## Privacy
 

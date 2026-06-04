@@ -86,10 +86,14 @@ python3 skills/kernel-crash-debugger/scripts/crash_session.py collect \
 
 ## 验证示例
 
-公开仓库不包含 crash dump、`vmlinux` 或私有内核源码。
-[examples/hugetlb-pmd-share](examples/hugetlb-pmd-share/README.zh-CN.md)
-记录了一个本地 hugetlbfs crash case 的预期验证形态，并包含 blind validation run 的
-[Codex session transcript](examples/hugetlb-pmd-share/session-019e8e85-transcript.html)。
+公开仓库不包含 crash dump、`vmlinux` 或私有内核源码。当前跟踪的本地验证示例有：
+
+- [examples/hugetlb-pmd-share](examples/hugetlb-pmd-share/README.zh-CN.md)：
+  hugetlbfs PMD sharing panic，包含本地 reproducer 和 blind validation
+  transcript。
+- [examples/mempolicy-offset-il-node-race](examples/mempolicy-offset-il-node-race/README.zh-CN.md)：
+  `MPOL_INTERLEAVE` / cpuset rebinding 导致的 `__next_zones_zonelist` panic，
+  包含 blind validation transcript 和预期根因链。
 
 ## 隐私
 
