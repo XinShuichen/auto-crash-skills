@@ -32,4 +32,4 @@ Comm: offset_il_w
 ## Blind Validation Transcript
 
 Codex 原始 session transcript 见
-[session-019e9145-transcript.html](session-019e9145-transcript.html)。
+[session-019e916f-transcript.html](session-019e916f-transcript.html)。

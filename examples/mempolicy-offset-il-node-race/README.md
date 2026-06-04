@@ -34,4 +34,4 @@ The expected analysis outcome is in
 ## Blind Validation Transcript
 
 The raw Codex session transcript is available as
-[session-019e9145-transcript.html](session-019e9145-transcript.html).
+[session-019e916f-transcript.html](session-019e916f-transcript.html).
