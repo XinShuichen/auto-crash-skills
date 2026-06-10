@@ -22,7 +22,7 @@ If any item is missing, ask for it before making root cause claims:
 ## Hard Rules
 
 1. Always maintain ECTM tables for non-trivial analysis.
-2. Use `scripts/crash_session.py` or direct `crash` only; keep all command outputs in the work directory.
+2. Use `scripts/crash_driver.py` or direct `crash` only; keep all command outputs in the work directory. For large remote dumps or multi-round socket interaction, prefer `scripts/crash_driver.py` and read `references/crash-driver-remote.md`.
 3. Evidence before conclusion. Do not call the panic function, last allocator, trap handler, or consumer dereference the root cause without producer evidence.
 4. Every mechanism claim must map to raw output, source code, disassembly, object fields, or a git diff.
 5. Verify source alignment before quoting source as fact. If source does not match the dump, downgrade source lines to mechanism hints.
@@ -44,6 +44,7 @@ If any item is missing, ask for it before making root cause claims:
 
 - `references/ectm.md`: read for every analysis.
 - `references/report-format.md`: read before writing a final report.
+- `references/crash-driver-remote.md`: read before deploying `crash_driver.py`, starting a socket server, sending socket commands, fetching paginated output, or shutting a remote server down.
 - `references/fix-commit-search.md`: read before upstream/local fix search.
 - `references/code-review-escalation.md`: read when root cause or candidate ranking is uncertain.
 - `references/review-prompts/kernel/`: upstream English review prompts. Read only the prompt files relevant to the current code review gap.

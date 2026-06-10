@@ -5,7 +5,7 @@
 Copy this one-sentence prompt to your AI assistant:
 
 ```text
-Install the Codex skill at https://github.com/XinShuichen/auto-crash-skills by cloning the repository, running ./install.sh for the default English skill unless I ask for Chinese, running ./install.sh --lang zh-CN when I ask for Chinese, verifying that kernel-crash-debugger exists under the active Codex skills directory, and telling me to start a new Codex session.
+Install the Codex skill at https://github.com/XinShuichen/auto-crash-skills by cloning the repository, running ./install.sh for the default English skill unless I ask for Chinese, running ./install.sh --lang zh-CN when I ask for Chinese, using ./install.sh --current-dir when I ask to install into the current workspace, verifying that kernel-crash-debugger exists under the selected skills directory, and telling me to start a new Codex session when installing globally.
 ```
 
 ## Instructions For The AI Assistant
@@ -47,10 +47,20 @@ CODEX_SKILLS_DIR=/path/to/codex/skills ./install.sh
 CRASH_SKILL_LANG=zh-CN ./install.sh
 ```
 
-4. Verify the installed skill.
+4. If the user asks to install into the current workspace, run the installer
+   from that workspace with `--current-dir`.
+
+```bash
+/path/to/auto-crash-skills/install.sh --current-dir
+test -f ./.codex/skills/kernel-crash-debugger/SKILL.md
+test -f ./.agent/skills/kernel-crash-debugger/SKILL.md
+```
+
+5. Verify the installed skill.
 
 ```bash
 test -f "${CODEX_SKILLS_DIR:-${CODEX_HOME:-$HOME/.codex}/skills}/kernel-crash-debugger/SKILL.md"
 ```
 
-5. Tell the user to start a new Codex session so skill metadata is reloaded.
+6. Tell the user to start a new Codex session so skill metadata is reloaded
+   after global installation.

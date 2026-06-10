@@ -10,8 +10,9 @@ and search for the fix commit that cuts the producer-side failure chain.
 ## What Is Included
 
 - `skills/kernel-crash-debugger/SKILL.md`: the installed skill entry point.
-- `skills/kernel-crash-debugger/scripts/crash_session.py`: a direct `crash`
-  command runner that saves outputs under the analysis work directory.
+- `skills/kernel-crash-debugger/scripts/crash_driver.py`: the supported
+  `crash(8)` driver for one-shot commands, interactive use, and persistent
+  Unix socket sessions.
 - `skills/kernel-crash-debugger/references/`: ECTM, report format, fix-search,
   and targeted review escalation references.
 - `skills/kernel-crash-debugger/references/review-prompts/`: a curated
@@ -36,6 +37,17 @@ The default install is English. To install the Chinese skill text instead, run:
 The installer copies the skill to `${HOME}/.codex/skills/kernel-crash-debugger`
 by default. Override the destination with `CODEX_HOME` or `CODEX_SKILLS_DIR`.
 You can also set `CRASH_SKILL_LANG=en` or `CRASH_SKILL_LANG=zh-CN`.
+
+To install into the current workspace instead of the Codex global skills
+directory, run:
+
+```bash
+./install.sh --current-dir
+```
+
+This creates both `./.codex/skills/kernel-crash-debugger` and
+`./.agent/skills/kernel-crash-debugger` under the directory where the command is
+run.
 
 If you want an AI assistant to install this skill for you, copy the prompt from
 [INSTALL_FOR_AI.md](INSTALL_FOR_AI.md).
@@ -70,20 +82,32 @@ context.json
 crash_outputs/
 ```
 
-## Direct Crash Script
+## Crash Driver Script
 
 ```bash
-python3 skills/kernel-crash-debugger/scripts/crash_session.py collect \
-  --dump-dir /path/to/case \
-  --work-dir /path/to/case/.crash-ai \
-  --command sys \
-  --command bt \
-  --command log \
-  --command "bt -l"
+python3 skills/kernel-crash-debugger/scripts/crash_driver.py /path/to/case \
+  -c sys \
+  -c bt \
+  -c log \
+  -c "bt -l"
 ```
 
-The script writes local files only. It does not publish reports or upload
-artifacts.
+For large dumps, start a persistent socket server once and send commands through
+the socket:
+
+```bash
+python3 skills/kernel-crash-debugger/scripts/crash_driver.py /path/to/case \
+  --server \
+  --socket /path/to/case/.crash-ai/crash-driver.sock \
+  --page-size 65536
+
+python3 skills/kernel-crash-debugger/scripts/crash_driver.py \
+  --socket /path/to/case/.crash-ai/crash-driver.sock \
+  -c "bt"
+```
+
+See `references/crash-driver-remote.md` inside the skill for remote deployment,
+pagination, and shutdown details.
 
 ## Validation Examples
 

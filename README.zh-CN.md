@@ -10,8 +10,8 @@ Auto Crash Skills 打包了用于 Linux kernel vmcore/kdump 分析的
 ## 包含内容
 
 - `skills/kernel-crash-debugger/SKILL.md`：安装后的 skill 入口。
-- `skills/kernel-crash-debugger/scripts/crash_session.py`：直接运行 `crash`
-  命令并把输出保存到分析工作目录的脚本。
+- `skills/kernel-crash-debugger/scripts/crash_driver.py`：当前支持的
+  `crash(8)` driver，支持一次性命令、交互模式和常驻 Unix socket 会话。
 - `skills/kernel-crash-debugger/references/`：ECTM、报告格式、修复搜索和定向
   review escalation reference。
 - `skills/kernel-crash-debugger/references/review-prompts/`：经过裁剪的
@@ -36,6 +36,16 @@ cd auto-crash-skills
 默认安装到 `${HOME}/.codex/skills/kernel-crash-debugger`。可以用
 `CODEX_HOME` 或 `CODEX_SKILLS_DIR` 覆盖目标目录，也可以用
 `CRASH_SKILL_LANG=en` 或 `CRASH_SKILL_LANG=zh-CN` 选择语言。
+
+如果要安装到当前 workspace，而不是 Codex 全局 skills 目录，运行：
+
+```bash
+./install.sh --current-dir
+```
+
+这会在执行命令所在目录下同时创建
+`./.codex/skills/kernel-crash-debugger` 和
+`./.agent/skills/kernel-crash-debugger`。
 
 如果想让 AI 助手代为安装这个 skill，请复制
 [INSTALL_FOR_AI.zh-CN.md](INSTALL_FOR_AI.zh-CN.md) 里的 prompt。
@@ -70,19 +80,31 @@ context.json
 crash_outputs/
 ```
 
-## 直接运行 crash 脚本
+## Crash Driver 脚本
 
 ```bash
-python3 skills/kernel-crash-debugger/scripts/crash_session.py collect \
-  --dump-dir /path/to/case \
-  --work-dir /path/to/case/.crash-ai \
-  --command sys \
-  --command bt \
-  --command log \
-  --command "bt -l"
+python3 skills/kernel-crash-debugger/scripts/crash_driver.py /path/to/case \
+  -c sys \
+  -c bt \
+  -c log \
+  -c "bt -l"
 ```
 
-脚本只写本地文件，不发布报告，也不会上传分析产物。
+大 dump 建议先启动常驻 socket server，再通过 socket 发命令：
+
+```bash
+python3 skills/kernel-crash-debugger/scripts/crash_driver.py /path/to/case \
+  --server \
+  --socket /path/to/case/.crash-ai/crash-driver.sock \
+  --page-size 65536
+
+python3 skills/kernel-crash-debugger/scripts/crash_driver.py \
+  --socket /path/to/case/.crash-ai/crash-driver.sock \
+  -c "bt"
+```
+
+远端部署、分页和关闭方式见 skill 内的
+`references/crash-driver-remote.md`。
 
 ## 验证示例
 

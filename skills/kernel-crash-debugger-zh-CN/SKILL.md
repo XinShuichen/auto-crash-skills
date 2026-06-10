@@ -20,7 +20,7 @@ description: 用于分析 Linux kernel crash dump、vmcore/kdump、kernel panic�
 ## 硬规则
 
 1. 进入实质分析后必须维护 ECTM 双表。
-2. 只能使用 `scripts/crash_session.py` 或直接运行 `crash`；所有命令输出必须保存到工作目录。
+2. 只能使用 `scripts/crash_driver.py` 或直接运行 `crash`；所有命令输出必须保存到工作目录。大 dump、远端常驻 socket 或多轮交互优先使用 `scripts/crash_driver.py`，并先阅读 `references/crash-driver-remote.md`。
 3. 先证据后结论；没有 producer 证据时，不要把 panic 函数、最后申请内存者、trap handler 或 consumer 解引用点直接写成根因。
 4. 每个机制结论都必须能映射到原始输出、源码、反汇编、对象字段或 git diff。
 5. 引用源码前必须核对版本对齐；未对齐时源码行只能作为机制参考。
@@ -42,6 +42,7 @@ description: 用于分析 Linux kernel crash dump、vmcore/kdump、kernel panic�
 
 - `references/ectm.md`：每次分析必读。
 - `references/report-format.md`：写最终报告前必读。
+- `references/crash-driver-remote.md`：部署 `crash_driver.py`、启动 socket server、通过 socket 发命令、拉分页输出或关闭远端 server 前必读。
 - `references/fix-commit-search.md`：搜索修复 commit 前必读。
 - `references/code-review-escalation.md`：根因或候选排序不确定时必读。
 - `references/review-prompts/kernel/`：上游英文 review prompts。只按当前代码审计缺口读取相关 prompt，不要修改这些 prompt。

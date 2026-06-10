@@ -1,4 +1,5 @@
 local-testdata/
+.DS_Store
 .crash-ai/
 *.vmcore
 vmcore

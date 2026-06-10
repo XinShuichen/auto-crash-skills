@@ -5,7 +5,7 @@
 把下面这一句话复制给你的 AI 助手：
 
 ```text
-请从 https://github.com/XinShuichen/auto-crash-skills 安装 Codex skill：克隆仓库，默认运行 ./install.sh 安装英文版；如果我要求中文，就运行 ./install.sh --lang zh-CN；确认 kernel-crash-debugger 已出现在当前 Codex skills 目录下，然后提醒我重新打开一个 Codex session。
+请从 https://github.com/XinShuichen/auto-crash-skills 安装 Codex skill：克隆仓库，默认运行 ./install.sh 安装英文版；如果我要求中文，就运行 ./install.sh --lang zh-CN；如果我要求安装到当前 workspace，就在该 workspace 运行 ./install.sh --current-dir；确认 kernel-crash-debugger 已出现在选择的 skills 目录下；全局安装后提醒我重新打开一个 Codex session。
 ```
 
 ## 给 AI 助手的安装说明
@@ -47,10 +47,18 @@ CODEX_SKILLS_DIR=/path/to/codex/skills ./install.sh
 CRASH_SKILL_LANG=zh-CN ./install.sh
 ```
 
-4. 验证 skill 已安装。
+4. 如果用户要求安装到当前 workspace，在该 workspace 中运行 `--current-dir`。
+
+```bash
+/path/to/auto-crash-skills/install.sh --current-dir
+test -f ./.codex/skills/kernel-crash-debugger/SKILL.md
+test -f ./.agent/skills/kernel-crash-debugger/SKILL.md
+```
+
+5. 验证全局 skill 已安装。
 
 ```bash
 test -f "${CODEX_SKILLS_DIR:-${CODEX_HOME:-$HOME/.codex}/skills}/kernel-crash-debugger/SKILL.md"
 ```
 
-5. 提醒用户重新打开一个 Codex session，让 skill metadata 重新加载。
+6. 全局安装后，提醒用户重新打开一个 Codex session，让 skill metadata 重新加载。
