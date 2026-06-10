@@ -39,10 +39,9 @@ For Chinese skill text:
 ./install.sh --lang zh-CN
 ```
 
-3. Respect custom Codex locations when the user provides them.
+3. Respect a custom skills directory when the user provides one.
 
 ```bash
-CODEX_HOME=/path/to/codex/home ./install.sh
 CODEX_SKILLS_DIR=/path/to/codex/skills ./install.sh
 CRASH_SKILL_LANG=zh-CN ./install.sh
 ```
@@ -52,14 +51,13 @@ CRASH_SKILL_LANG=zh-CN ./install.sh
 
 ```bash
 /path/to/auto-crash-skills/install.sh --current-dir
-test -f ./.codex/skills/kernel-crash-debugger/SKILL.md
-test -f ./.agent/skills/kernel-crash-debugger/SKILL.md
+test -f ./.agents/skills/kernel-crash-debugger/SKILL.md
 ```
 
 5. Verify the installed skill.
 
 ```bash
-test -f "${CODEX_SKILLS_DIR:-${CODEX_HOME:-$HOME/.codex}/skills}/kernel-crash-debugger/SKILL.md"
+test -f "${CODEX_SKILLS_DIR:-$HOME/.agents/skills}/kernel-crash-debugger/SKILL.md"
 ```
 
 6. Tell the user to start a new Codex session so skill metadata is reloaded

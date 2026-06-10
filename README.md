@@ -34,9 +34,9 @@ The default install is English. To install the Chinese skill text instead, run:
 ./install.sh --lang zh-CN
 ```
 
-The installer copies the skill to `${HOME}/.codex/skills/kernel-crash-debugger`
-by default. Override the destination with `CODEX_HOME` or `CODEX_SKILLS_DIR`.
-You can also set `CRASH_SKILL_LANG=en` or `CRASH_SKILL_LANG=zh-CN`.
+The installer copies the skill to `${HOME}/.agents/skills/kernel-crash-debugger`
+by default. Override the destination with `CODEX_SKILLS_DIR`. You can also set
+`CRASH_SKILL_LANG=en` or `CRASH_SKILL_LANG=zh-CN`.
 
 To install into the current workspace instead of the Codex global skills
 directory, run:
@@ -45,9 +45,8 @@ directory, run:
 ./install.sh --current-dir
 ```
 
-This creates both `./.codex/skills/kernel-crash-debugger` and
-`./.agent/skills/kernel-crash-debugger` under the directory where the command is
-run.
+This creates `./.agents/skills/kernel-crash-debugger` under the directory where
+the command is run.
 
 If you want an AI assistant to install this skill for you, copy the prompt from
 [INSTALL_FOR_AI.md](INSTALL_FOR_AI.md).

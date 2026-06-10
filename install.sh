@@ -5,8 +5,7 @@ repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 base_skill_src="${repo_dir}/skills/kernel-crash-debugger"
 zh_skill_src="${repo_dir}/skills/kernel-crash-debugger-zh-CN"
 
-codex_home="${CODEX_HOME:-${HOME}/.codex}"
-skills_dir="${CODEX_SKILLS_DIR:-${codex_home}/skills}"
+skills_dir="${CODEX_SKILLS_DIR:-${HOME}/.agents/skills}"
 target="${skills_dir}/kernel-crash-debugger"
 lang="${CRASH_SKILL_LANG:-en}"
 install_scope="codex"
@@ -20,12 +19,10 @@ Default language: en
 
 Options:
   --lang en|zh-CN      Install English or Chinese skill text.
-  --current-dir        Install to both ./.codex/skills/kernel-crash-debugger
-                       and ./.agent/skills/kernel-crash-debugger under the
-                       caller's current working directory.
+  --current-dir        Install to ./.agents/skills/kernel-crash-debugger under
+                       the caller's current working directory.
 
 Environment:
-  CODEX_HOME=/path/to/codex/home
   CODEX_SKILLS_DIR=/path/to/codex/skills
   CRASH_SKILL_LANG=en|zh-CN
 EOF
@@ -85,8 +82,7 @@ esac
 
 if [[ "${install_scope}" == "current-dir" ]]; then
   targets=(
-    "${PWD}/.codex/skills/kernel-crash-debugger"
-    "${PWD}/.agent/skills/kernel-crash-debugger"
+    "${PWD}/.agents/skills/kernel-crash-debugger"
   )
 else
   targets=("${target}")
@@ -111,7 +107,7 @@ install_one() {
 
   if [[ "${target_real}" == "${source_real}" ]]; then
     echo "Refusing to install over the source skill directory: ${target_real}" >&2
-    echo "Run --current-dir from the workspace that should receive .codex/.agent skills." >&2
+    echo "Run --current-dir from the workspace that should receive .agents skills." >&2
     exit 1
   fi
 

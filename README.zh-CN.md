@@ -33,9 +33,9 @@ cd auto-crash-skills
 ./install.sh --lang zh-CN
 ```
 
-默认安装到 `${HOME}/.codex/skills/kernel-crash-debugger`。可以用
-`CODEX_HOME` 或 `CODEX_SKILLS_DIR` 覆盖目标目录，也可以用
-`CRASH_SKILL_LANG=en` 或 `CRASH_SKILL_LANG=zh-CN` 选择语言。
+默认安装到 `${HOME}/.agents/skills/kernel-crash-debugger`。可以用
+`CODEX_SKILLS_DIR` 覆盖目标目录，也可以用 `CRASH_SKILL_LANG=en` 或
+`CRASH_SKILL_LANG=zh-CN` 选择语言。
 
 如果要安装到当前 workspace，而不是 Codex 全局 skills 目录，运行：
 
@@ -43,9 +43,8 @@ cd auto-crash-skills
 ./install.sh --current-dir
 ```
 
-这会在执行命令所在目录下同时创建
-`./.codex/skills/kernel-crash-debugger` 和
-`./.agent/skills/kernel-crash-debugger`。
+这会在执行命令所在目录下创建
+`./.agents/skills/kernel-crash-debugger`。
 
 如果想让 AI 助手代为安装这个 skill，请复制
 [INSTALL_FOR_AI.zh-CN.md](INSTALL_FOR_AI.zh-CN.md) 里的 prompt。
